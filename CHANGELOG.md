@@ -13,6 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   in advance of when the subscription is needed. The `Staged` class has also been added
   for use with `updateSubscriptions()`.
 
+- Added a new property called `canAdmin` to the `permissions` field that's part of the
+  `updatePermissions()` method. `canAdmin` can be used to dynamically change permissions
+  for participants from within a call. Admins have the ability to manage participants
+  in a call or manage transcriptions.
+
 ### Changed
 
 <!-- for changed functionality -->
@@ -22,37 +27,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Renamed `RecordingMode` and `StreamingEndpointType` enum constants to be lowercase, to
   match other enums.
 
-    - Before:
+  - Before:
 
-      ```kotlin
-      enum class RecordingMode {
-        Cloud,
-        RawTracks,
-        Local,
-        Off
-      }
+    ```kotlin
+    enum class RecordingMode {
+      Cloud,
+      RawTracks,
+      Local,
+      Off
+    }
 
-      enum class StreamingEndpointType {
-        Hls,
-        Rtmp
-      }
-      ```
+    enum class StreamingEndpointType {
+      Hls,
+      Rtmp
+    }
+    ```
 
-    - After:
+  - After:
 
-      ```kotlin
-      enum class RecordingMode {
-        cloud,
-        rawTracks,
-        local,
-        off
-      }
+    ```kotlin
+    enum class RecordingMode {
+      cloud,
+      rawTracks,
+      local,
+      off
+    }
 
-      enum class StreamingEndpointType {
-        hls,
-        rtmp
-      }
-      ```
+    enum class StreamingEndpointType {
+      hls,
+      rtmp
+    }
+    ```
 
 - Simplified the `setInputEnabled` and `setIsPublishing` convenience methods to control
   only the camera and microphone. `setInputEnabled` has been renamed to `setInputsEnabled`.
@@ -127,7 +132,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
-- Removed the versions of `setInputsEnabled` and `setIsPublishing` which take a `Map` as input. 
+- Removed the versions of `setInputsEnabled` and `setIsPublishing` which take a `Map` as input.
 
 ## [0.8.0] - 2023-05-10
 
@@ -136,7 +141,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The `streamingSettings` parameter in `updateRecording` is no longer optional.
 
   - Before:
-  
+
     ```kotlin
     fun updateLiveStream(
         streamingSettings: StreamingUpdateSettings? = null,
@@ -154,7 +159,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
         listener: RequestListener? = null
     )
     ```
-    
+
 - The timestamp fields in `CallConfiguration` are now of type `Long` rather than `Int`.
 
   - Before:
@@ -174,12 +179,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     val roomNotBefore: Long? = null,
     val tokenNotBefore: Long? = null,
     ```
-    
+
 - The `onLiveStreamStarted` callback now has a single `LiveStreamStatus` parameter, which contains
   the information that was previously provided as multiple parameters.
 
   - Before:
-  
+
     ```kotlin
     fun onLiveStreamStarted(
         streamId: StreamId,
@@ -187,9 +192,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
         layout: StreamingLayout?
     )
     ```
-    
+
   - After:
-  
+
     ```kotlin
     fun onLiveStreamStarted(status: LiveStreamStatus)
     ```
@@ -272,7 +277,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     ```
 
   - After:
-  
+
     ```kotlin
     fun startLiveStream(
         endpoints: LiveStreamEndpoints,
@@ -297,7 +302,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     ```
 
   - After:
-  
+
     ```kotlin
     fun startRecording(
         streamingSettings: StreamingSettings? = null,
@@ -320,7 +325,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     ```
 
   - After:
-  
+
     ```kotlin
     fun updateRecording(
         streamingSettings: StreamingUpdateSettings? = null,
@@ -335,7 +340,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - The `VideoView.release()` method has been removed, as cleanup is now automatic.
 
-- The `MeetingSession.topology` field has been removed. 
+- The `MeetingSession.topology` field has been removed.
 
 ## [0.7.0]
 
@@ -899,4 +904,3 @@ This library version was corrupted by a faulty build script and will crash unexp
 ## [0.1.1] - 2022-04-14
 
 Initial release.
-
