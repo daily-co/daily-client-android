@@ -5,7 +5,131 @@ All notable changes to the **daily-android** SDK will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 0.8.0
+## [0.9.0] - 2023-07-27
+
+### Added
+
+- Added `SubscriptionState.staged`, allowing subscription setup steps to be performed
+  in advance of when the subscription is needed. The `Staged` class has also been added
+  for use with `updateSubscriptions()`.
+
+### Changed
+
+<!-- for changed functionality -->
+
+- Renamed `RequestFailedException` to `OperationFailedException` for clarity.
+
+- Renamed `RecordingMode` and `StreamingEndpointType` enum constants to be lowercase, to
+  match other enums.
+
+    - Before:
+
+      ```kotlin
+      enum class RecordingMode {
+        Cloud,
+        RawTracks,
+        Local,
+        Off
+      }
+
+      enum class StreamingEndpointType {
+        Hls,
+        Rtmp
+      }
+      ```
+
+    - After:
+
+      ```kotlin
+      enum class RecordingMode {
+        cloud,
+        rawTracks,
+        local,
+        off
+      }
+
+      enum class StreamingEndpointType {
+        hls,
+        rtmp
+      }
+      ```
+
+- Simplified the `setInputEnabled` and `setIsPublishing` convenience methods to control
+  only the camera and microphone. `setInputEnabled` has been renamed to `setInputsEnabled`.
+
+  - Before:
+
+    ```kotlin
+    fun setInputEnabled(
+        mediaType: OutboundMediaType,
+        isEnabled: Boolean,
+        listener: RequestListener? = null
+    )
+
+    fun setIsPublishing(
+        mediaType: OutboundMediaType,
+        isPublishing: Boolean,
+        listener: RequestListener? = null
+    )
+    ```
+
+  - After:
+
+    ```kotlin
+    fun setInputsEnabled(
+        camera: Boolean? = null,
+        microphone: Boolean? = null,
+        listener: RequestListener? = null
+    )
+
+    fun setIsPublishing(
+        camera: Boolean? = null,
+        microphone: Boolean? = null,
+        listener: RequestListener? = null
+    )
+    ```
+
+- Simplified the `setSubscriptionState` convenience methods to accept track state updates
+  more directly.
+
+  - Before:
+
+    ```kotlin
+    fun setSubscriptionState(
+        participantId: ParticipantId,
+        mediaTypeToState: Map<InboundMediaType, SubscriptionState>,
+        listener: RequestListener? = null
+    )
+
+    fun setSubscriptionState(
+        participantIdToMediaTypeToState: Map<ParticipantId, Map<InboundMediaType, SubscriptionState>>,
+        listener: RequestListener? = null
+    )
+    ```
+
+  - After:
+
+    ```kotlin
+    fun setSubscriptionState(
+        participantId: ParticipantId,
+        camera: SubscriptionState? = null,
+        microphone: SubscriptionState? = null,
+        screenVideo: SubscriptionState? = null,
+        screenAudio: SubscriptionState? = null,
+        listener: RequestListener? = null
+    )
+
+    fun setSubscriptionState(
+        participantIdToTracks: Map<ParticipantId, TrackSubscriptionStateUpdate>,
+        listener: RequestListener? = null
+    )
+    ```
+
+### Removed
+
+- Removed the versions of `setInputsEnabled` and `setIsPublishing` which take a `Map` as input. 
+
+## [0.8.0] - 2023-05-10
 
 ### Changed
 
