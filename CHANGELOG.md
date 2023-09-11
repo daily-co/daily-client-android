@@ -5,6 +5,40 @@ All notable changes to the **daily-android** SDK will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.10.0] - 2023-09-08
+
+### Added
+
+- Support for receiving streams encoded using H.264.
+
+- Added the ability to subscribe to remote custom tracks:
+
+  - `MediaSubscriptionSettingsUpdate.customVideo`
+  - `MediaSubscriptionSettingsUpdate.customAudio`
+  - `Media.customVideo`
+  - `Media.customAudio`
+
+- Added a beta API for sending a custom video track, `CallClient.beta.addCustomVideoTrack()`,
+  and a testing API to add a sample custom track, `CallClient.beta.addSampleCustomVideoTrack()`.
+
+  It's possible to configure published custom tracks using the new fields:
+
+    - `InputSettingsUpdate.customVideo`
+    - `InputSettingsUpdate.customAudio`
+    - `PublishingSettingsUpdate.customVideo`
+    - `PublishingSettingsUpdate.customAudio`
+
+  This API is still in development and may evolve in future releases.
+
+- Added a new field `inputsEnabled` in the argument to the method `updateRemoteParticipants()`, allowing participant admins to remote-mute others, and meeting owners to remote-mute or -unmute others.
+
+### Changed
+
+- Combined the two native libraries in the SDK into a single library. This reduces the
+  size of the SDK from 43MB to 25MB.
+
+- Hardware-accelerated video encoders and decoders are now used when available.
+
 ## [0.9.0] - 2023-07-27
 
 ### Added
@@ -137,6 +171,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.8.0] - 2023-05-10
 
 ### Changed
+
+<!-- for changed functionality -->
 
 - The `streamingSettings` parameter in `updateRecording` is no longer optional.
 
