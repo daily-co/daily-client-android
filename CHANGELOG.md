@@ -5,6 +5,23 @@ All notable changes to the **daily-android** SDK will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.11.0] - 2023-10-05
+
+### Added
+
+- New beta API for accessing video stats, `VideoView.beta.addVideoTrackStatsListener()`
+- Added support for screen sharing:
+    - `CallClient.startScreenShare` : Starts a screen share from the local participant.
+    - `CallClient.stopScreenShare` : Stops the local participant current screen share, if there is one.
+    - `CallClient.setScreenShareProjectionIntent` : Intent with the permission for screen sharing. Needed in case we wish to invoke directly the method `updateInputs` to start or stop a screen share.
+
+### Fixed
+
+- Temporary network interruptions will now be handled properly and reconnected.
+- Audio device selection issues:
+    - When the preferred audio device is no longer available, it will now fall back to our default behavior for audio device selection.
+    - Fixed issue where in some scenarios it was selecting to use Earpiece even without the user requesting it.
+
 ## [0.10.1] - 2023-09-12
 
 ### Fixed
