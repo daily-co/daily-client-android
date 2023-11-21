@@ -5,6 +5,24 @@ All notable changes to the **daily-android** SDK will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.12.0] - 2023-11-21
+
+### Added
+
+- Added support for starting/stopping transcription, and receiving transcription events.
+  - `CallClient.startTranscription()`
+  - `CallClient.stopTranscription()`
+  - `CallClientListener.onTranscriptionStarted`
+  - `CallClientListener.onTranscriptionStopped`
+  - `CallClientListener.onTranscriptionMessage`
+  - `CallClientListener.onTranscriptionError`
+
+### Fixed
+
+- Fixed a crash when modifying a large number of subscriptions at once.
+- Fixed a screen share issue that could make the app freeze.
+- Fixed a screen share issue for compatibility with Android 14.
+
 ## [0.11.1] - 2023-10-27
 
 ### Fixed
