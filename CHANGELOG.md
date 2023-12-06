@@ -5,6 +5,42 @@ All notable changes to the **daily-android** SDK will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.13.0] - 2023-12-06
+
+### Added
+
+- Added support to change screen share publish settings.
+  ```kotlin
+    // Example
+    callClient?.updatePublishing(
+        PublishingSettingsUpdate(
+            screenVideo = ScreenVideoPublishingSettingsUpdate(
+                isPublishing = Enable(),
+                sendSettings = VideoSendSettingsUpdate(
+                    maxQuality = VideoMaxQualityUpdate.low,
+                    encodings = VideoEncodingsSettingsUpdate(
+                        mapOf(
+                            VideoMaxQualityUpdate.low to
+                                VideoEncodingSettingsUpdate(
+                                    maxBitrate = BitRate(1_200_000),
+                                    scaleResolutionDownBy = Scale(1F),
+                                    maxFramerate = FrameRate(15)
+                                ),
+                        )
+                    )
+                )
+            )
+        )
+    )
+  ```
+
+### Changed
+
+- `StartTranscriptionProperties` defaults have been removed in favor of Deepgram
+  defaults.
+- `StartTranscriptionProperties.redact` property is now a `List<String>`
+  instead of a `Boolean`. This allows setting any of Deepgram's redact values.
+
 ## [0.12.0] - 2023-11-21
 
 ### Added
