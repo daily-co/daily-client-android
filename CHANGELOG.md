@@ -5,6 +5,45 @@ All notable changes to the **daily-android** SDK will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.14.0] - 2023-12-22
+
+### Added
+
+- Added ability to choose the preferred codec.
+  ```Kotlin
+    callClient?.updatePublishing(
+        PublishingSettingsUpdate(
+            camera = CameraPublishingSettingsUpdate(
+                sendSettings = VideoSendSettingsUpdate(
+                    preferredCodec = CodecNameUpdate.h264
+                )
+            )
+        )
+    )
+  ```
+- Added `VideoTrackCapturerToSurface` and `VideoTrackCapturerToBitmap`, which allow video
+  tracks from participants to be captured.
+- Added `VideoTextureView`, allowing videos to be rendered to an Android `TextureView`,
+  rather than a `SurfaceView`. This has reduced performance compared to `VideoView`,
+  but allows more flexible layering in the Android UI hierarchy.
+- Added a remote participant audio level observer that provides the audio level for all remote participants respecting the specified frequency.
+  ```kotlin
+    // Starts the remote audio level observer
+    callClient?.startRemoteParticipantsAudioLevelObserver(200)
+    // Stops the remote audio level observer
+    callClient?.stopRemoteParticipantsAudioLevelObserver()
+    // New listener inside CallClientListener
+    override fun onRemoteParticipantsAudioLevel(
+        participantsAudioLevel: Map<ParticipantId, Float>
+    ) {
+        // audio level for each remote participant
+    }
+  ```
+
+### Fixed
+
+- Fixed issue with numeric user IDs in meeting tokens
+
 ## [0.13.0] - 2023-12-06
 
 ### Added
