@@ -5,6 +5,25 @@ All notable changes to the **daily-android** SDK will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.15.0] - 2024-01-31
+
+### Added
+
+- Added `participantId` field to `TranscriptionMessageData`.
+
+- Added `transcriptId` field to `TranscriptionStatus`.
+
+### Fixed
+
+- Fixed multiple issues which could cause a deadlock during network reconnection.
+
+- Ensure that `updateInputs()` continues to be usable while the network is down.
+
+- Fixed an issue where the SDK could fail to release resources when turning off the camera track.
+
+- Fixed a crash which could occur if the network connection drops soon after joining.
+
+
 ## [0.14.0] - 2023-12-22
 
 ### Added
@@ -43,6 +62,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Fixed issue with numeric user IDs in meeting tokens
+
 
 ## [0.13.0] - 2023-12-06
 
