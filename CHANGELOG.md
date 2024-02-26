@@ -5,6 +5,54 @@ All notable changes to the **daily-android** SDK will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.16.0] - 2024-02-26
+
+### Added
+
+- Added `VideoView.mirrorHorizontally` and `VideoTextureView.mirrorHorizontally`, to flip
+  the direction of rendering in the X axis.
+
+- Ability to remove and update custom tracks, using `CallClient.updateCustomVideoTrack()`
+  and `CallClient.removeCustomVideoTrack()`.
+
+- Ability to toggle the camera flashlight with `updateInputs()`, using the
+  `VideoMediaTrackSettingsUpdate.torch` field.
+
+  ```kotlin
+  callClient?.updateInputs(
+      InputSettingsUpdate(
+          camera = CameraInputSettingsUpdate(
+              settings = VideoMediaTrackSettingsUpdate(
+                  torch = Torch(true),
+              )
+          )
+      )
+  )
+  ```
+
+### Changed
+
+- More SDK logging now appears in the dashboard.
+
+- In HIPAA mode, the user ID is no longer redacted in dashboard logs if it's a valid UUID.
+
+- The custom video tracks feature has been promoted from "beta" status.
+
+### Deprecated
+
+- `CallClient.beta.addCustomVideoTrack()` has been deprecated, in favor of
+  `CallClient.addCustomVideoTrack()`.
+
+### Removed
+
+- Removed `CustomTrackInputSettingsUpdate` from the beta custom tracks API. `updatePublishing`
+  should be used to toggle custom tracks instead.
+
+### Fixed
+
+- Enable Opus FEC to improve audio with network packet loss.
+
+
 ## [0.15.0] - 2024-01-31
 
 ### Added
