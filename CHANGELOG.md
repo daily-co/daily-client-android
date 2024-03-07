@@ -5,6 +5,39 @@ All notable changes to the **daily-android** SDK will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+
+## [0.17.0] - 2024-03-07
+
+### Added
+
+- Ability to set the camera zoom with `updateInputs()`, using the
+  `VideoMediaTrackSettingsUpdate.zoom` field.
+
+- Added convenience methods for setting camera torch and zoom:
+  - `CallClient.setCameraZoom()`
+  - `CallClient.setCameraTorch()`
+
+- Added support for `audio-only` recording layout preset.
+
+### Changed
+
+- The `startedBy` field in `TranscriptionStatus` is now nullable. The value may be null when
+  transcription was started using the REST API, rather than by a call participant.
+
+### Fixed
+
+- Fixed an issue that could cause join to fail if recording/transcription/live
+  stream was started from the REST API.
+
+- Fixed `onFirstFrameAvailable` exception in release builds. This exception was encountered when
+  logging a message about the active camera, and didn't otherwise impact the operation of the SDK.
+
+- Fixed an issue where stopping a screen share could throw an exception.
+
+- Fixed an issue in the demo app where screen share could be started before the foreground
+  service was ready.
+
+
 ## [0.16.0] - 2024-02-26
 
 ### Added
