@@ -6,6 +6,41 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [0.19.0] - 2024-04-16
+
+### Added
+
+- Additional parameters for starting a transcription, and access to more data about the
+  transcribed text.
+  - `StartTranscriptionProperties.punctuate`
+  - `StartTranscriptionProperties.endpointing`
+  - `StartTranscriptionProperties.includeRawResponse`
+  - `StartTranscriptionProperties.extra`
+  - `TranscriptionMessageData.timestamp`
+  - `TranscriptionMessageData.rawResponse`
+
+- Added a local audio level observer that provides the audio level for the local participant respecting the specified frequency.
+  ```swift
+    // Starts the local audio level observer
+    callClient?.startLocalAudioLevelObserver(200)
+    // Stops the local audio level observer
+    callClient?.stopLocalAudioLevelObserver()
+    // New listener inside CallClientListener
+    override fun onLocalAudioLevel(audioLevel: Float) {
+        // audio level for the local participant
+    }
+  ```
+
+### Fixed
+
+- Resolved an issue in `PublishingSettingsUpdate.Builder` which meant custom tracks were ignored.
+- Fixed issue when calling `updatePublishing()` immediately after `updateInputs()`.
+
+- We now continue sending screen share frames at a slower rate while the screen is static. This
+  avoids the need to wait to the first frame to arrive when a new participant joins, or when
+  capturing a bitmap from the track.
+
+
 ## [0.18.0] - 2024-03-28
 
 ### Added
