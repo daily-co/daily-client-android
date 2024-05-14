@@ -6,6 +6,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [0.20.0] - 2024-05-14
+
+### Fixed
+
+- Resolved an issue with screen sharing where the new dimensions were not being applied when rotating the screen.
+
+- Resolved an issue where the videos sent had the wrong orientation when viewed on iOS mobile web.
+
+- Resolved an issue with screen sharing where the new dimensions were not being applied when `MediaProjection` `onCapturedContentResize` was triggered.
+
+- Fixed an issue where `joinedAt` value (participant info) could sometimes be zero.
+
+
 ## [0.19.0] - 2024-04-16
 
 ### Added
