@@ -6,16 +6,37 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [0.21.0] - 2024-06-25
+
+### Added
+
+- Introduced support to send connections to Daily's HTTPS and WebSocket endpoints to a specified proxy server instead.
+  ```kotlin
+    callClient?.setProxyUrl("YOUR_PROXY_URL")
+  ```
+
+- Introduced support for specifying custom TURN servers rather than only using Daily's default TURN servers.
+  ```kotlin
+    callClient?.setIceConfig(IceConfig(
+        placement = IceConfigPlacement.Back,
+        iceServers = listOf(
+            IceServers(urls = listOf("stun:stun.l.google.com:19302"))
+        )
+    ))
+  ```
+
+### Fixed
+
+- Classes in the root package are now repackaged under `co.daily` to avoid name conflicts.
+
+
 ## [0.20.0] - 2024-05-14
 
 ### Fixed
 
 - Resolved an issue with screen sharing where the new dimensions were not being applied when rotating the screen.
-
 - Resolved an issue where the videos sent had the wrong orientation when viewed on iOS mobile web.
-
 - Resolved an issue with screen sharing where the new dimensions were not being applied when `MediaProjection` `onCapturedContentResize` was triggered.
-
 - Fixed an issue where `joinedAt` value (participant info) could sometimes be zero.
 
 
@@ -33,7 +54,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `TranscriptionMessageData.rawResponse`
 
 - Added a local audio level observer that provides the audio level for the local participant respecting the specified frequency.
-  ```swift
+  ```kotlin
     // Starts the local audio level observer
     callClient?.startLocalAudioLevelObserver(200)
     // Stops the local audio level observer
