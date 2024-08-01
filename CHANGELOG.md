@@ -6,6 +6,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [0.22.1] - 2024-08-01
+
+### Fixed
+
+- Fixed a crash when stopping screen share
+
+
+## [0.22.0] - 2024-07-30
+
+### Added
+
+- Added new metrics that will allow us to better understand the meeting quality.
+
+### Fixed
+
+- Fixed an issue to show the correct state when the mic is muted remotely.
+- Fixed an issue with meeting moves that could occur in an exceptional case where, for a short period of time, we didn't receive information about which worker server to connect to.
+
+
 ## [0.21.0] - 2024-06-25
 
 ### Added
