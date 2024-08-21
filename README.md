@@ -10,7 +10,7 @@ To depend on the Daily Client package, you can add this package via maven, for e
 
 ```
 dependencies {
-    implementation 'co.daily:client:0.22.1'
+    implementation 'co.daily:client:0.23.0'
     // ... other dependencies
 }
 ```
