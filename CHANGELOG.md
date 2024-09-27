@@ -6,6 +6,27 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [0.24.0] - 2024-09-27
+
+### Added
+
+- `CallClientListener.onAppMessageFromRestApi()` callback for receiving app messages sent through the REST API.
+
+### Changed
+
+- `TranscriptionStatus.transcriptId` is now nullable, fixing an error where null values from the server would prevent the `onTranscriptionStarted()` callback from being invoked.
+
+### Deprecated
+
+- Transcription property `tier` has been deprecated. Use `model` instead. See https://developers.deepgram.com/docs/model.
+
+### Fixed
+
+- Fixed a logging-related crash (stack overflow) that could occur when rapidly starting and stopping the SDK.
+
+- Fixed an issue where missing fields in the domain/room permission config could cause a connection failure.
+
+
 ## [0.23.0] - 2024-08-21
 
 ### Added
