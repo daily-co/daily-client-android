@@ -6,6 +6,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [0.25.0] - 2024-11-05
+
+### Added
+
+- `VideoTextureView.Listener` and `VideoTextureView.setListener()`, which allow changes to the video resolution to be detected.
+
+### Changed
+
+- Renamed `org.webrtc` package to `co.daily.webrtc` to avoid conflicts.
+
+- Renamed some variants of `setSubscriptionState` and `updateSubscriptions` to avoid overload resolution issues.
+  - `setSubscriptionStateForParticipantMedia` 
+  - `updateSubscriptionsForParticipants`
+  - `updateSubscriptionsForParticipantsWithProfiles`
+
+
 ## [0.24.0] - 2024-09-27
 
 ### Added
