@@ -6,12 +6,21 @@ If you are developing a video application and targeting Android apps, we think D
 
 ### Adding the dependency
 
-To depend on the Daily Client package, you can add this package via maven, for example in a `build.gradle` file, like the example below:
+To depend on the Daily Client package, you can add this package via Maven, for example in a `build.gradle` file, like the example below:
 
-```
+```groovy
 dependencies {
     implementation 'co.daily:client:0.26.0'
     // ... other dependencies
+}
+```
+
+Optionally, to use the camera video processor (for background blur and replacement), also add the following dependency:
+
+```groovy
+dependencies {
+    // ...
+    implementation 'co.daily:client-videoprocessor-plugin:0.1.0'
 }
 ```
 
