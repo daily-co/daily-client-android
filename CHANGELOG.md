@@ -6,6 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [0.27.0] - 2024-12-04
+
+### Fixed
+
+- Improved meeting move robustness by increasing the number of retries, to account for
+  situations where the backend takes longer to complete the move.
+
+- Fix crash when creating and deleting `VideoTextureView`/`VideoTrackCapturerToSurface` without
+  also creating a `CallClient`.
+
+
 ## [0.26.0] - 2024-11-11
 
 ### Added
