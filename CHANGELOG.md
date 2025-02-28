@@ -6,6 +6,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [0.29.0] - 2025-02-28
+
+### Added
+
+- Added support to automatically start a recording when joining a room if the `start_cloud_recording` token property is
+  set to `True`.
+
+### Fixed
+
+- Fixed an issue where reconnection would fail if the meeting token was no longer valid.
+
+### Security
+
+- Updated third party dependencies
+
+
 ## [0.28.0] - 2024-12-13
 
 ### Fixed
