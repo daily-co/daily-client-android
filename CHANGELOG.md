@@ -6,6 +6,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [0.32.0] - 2025-07-24
+
+### Added
+
+- New `onNetworkConnectionStatusUpdated()` callback which is invoked when network connections
+  needed for a call are interrupted.
+
+### Fixed
+
+- Handle meeting session ID changes which occur once the session has started.
+
+- Fixed potential NullPointerException when the device list changes.
+
+
 ## [0.31.0] - 2025-05-07
 
 ### Added
