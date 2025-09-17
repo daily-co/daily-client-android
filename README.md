@@ -10,7 +10,7 @@ To depend on the Daily Client package, you can add this package via Maven, for e
 
 ```groovy
 dependencies {
-    implementation 'co.daily:client:0.33.0'
+    implementation 'co.daily:client:0.34.0'
     // ... other dependencies
 }
 ```
@@ -20,7 +20,7 @@ Optionally, to use the camera video processor (for background blur and replaceme
 ```groovy
 dependencies {
     // ...
-    implementation 'co.daily:client-videoprocessor-plugin:0.1.0'
+    implementation 'co.daily:client-videoprocessor-plugin:0.1.1'
 }
 ```
 
