@@ -6,6 +6,33 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [0.38.0] - 2026-06-19
+
+### Added
+
+- Added automatic fallback to `dailywebrtc.com` and `dailywebrtc.net` when `daily.co` authoritative nameservers are unreachable, improving connection resilience.
+
+### Changed
+
+- Adaptive Bitrate (ABR) is now enabled by default for camera tracks. It can still be disabled by setting `allowAdaptiveLayers` to `false` in the camera `sendSettings`.
+
+### Fixed
+
+- Fixed a segmentation fault that could occur when a `CallClient` was released (or garbage collected) while still in a call, especially right before the application exited: the internal media transport teardown now completes before `release()` returns, and WebRTC internals are no longer torn down at process exit while SDK threads may still be running.
+
+- Fixed panics in signalling reconnect paths when room lookup returns no worker.
+
+- Fixed support for cloud-audio-only recording type
+
+### Performance
+
+- Replaced `ureq` HTTP client with `hyper` + `rustls` (ring backend). Includes connection timeouts, TLS configuration
+  reuse, and per-request timing metrics for DNS lookup, TCP connect, and TLS handshake.
+
+- Added per-phase connection timing metrics for WebSocket signalling (DNS lookup, TCP connect, TLS handshake, and
+  WebSocket upgrade), complementing the existing HTTP connection timings.
+
+
 ## [0.37.0] - 2026-01-16
 
 ### Fixed
@@ -141,7 +168,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `co.daily:client-videoprocessor-plugin:0.1.0` must be added to the project.
 
 * Support for custom audio tracks, using `addCustomAudioTrack()`, `updateCustomAudioTrack()`,
-  and `removeCustomAudioTrack()`. 
+  and `removeCustomAudioTrack()`.
 
 ### Fixed
 
@@ -159,7 +186,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Renamed `org.webrtc` package to `co.daily.webrtc` to avoid conflicts.
 
 - Renamed some variants of `setSubscriptionState` and `updateSubscriptions` to avoid overload resolution issues.
-  - `setSubscriptionStateForParticipantMedia` 
+  - `setSubscriptionStateForParticipantMedia`
   - `updateSubscriptionsForParticipants`
   - `updateSubscriptionsForParticipantsWithProfiles`
 
