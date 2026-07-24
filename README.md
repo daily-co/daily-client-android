@@ -10,7 +10,7 @@ To depend on the Daily Client package, you can add this package via Maven, for e
 
 ```groovy
 dependencies {
-    implementation 'co.daily:client:0.38.1'
+    implementation 'co.daily:client:0.39.0'
     // ... other dependencies
 }
 ```
