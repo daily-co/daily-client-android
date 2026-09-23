@@ -6,6 +6,33 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [0.40.0] - 2026-09-23
+
+### Added
+
+- Added support to automatically start transcription when joining a room if the
+  `auto_start_transcription` meeting token property is set, using the room's
+  `auto_transcription_settings`.
+
+- Added candidate-pair round-trip time to call metrics, so latency is
+  measured consistently, including for receive-only participants.
+
+### Changed
+
+- Upgraded libwebrtc to branch-heads/8010 (M153). Its vendored media and crypto
+  dependencies (ffmpeg, libvpx and BoringSSL among them) are substantially
+  newer.
+
+### Fixed
+
+- Fixed an issue where `videoBitrate` and `audioBitrate` in a meeting token's
+  `start_cloud_recording_opts` were ignored, causing recordings started from the
+  token to use the default bitrates.
+
+- Fixed multiple memory, thread and file descriptor leaks when creating and
+  releasing `CallClient`s.
+
+
 ## [0.39.1] - 2026-07-29
 
 ### Fixed
@@ -39,7 +66,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Constructing a `CallClient` no longer crashes with an `ExceptionInInitializerError`
   on devices where EGL/GLES initialization fails. Instead, a non-fatal error is
-  reported through `CallClientListener.onError(...)`, and an audio-only session is 
+  reported through `CallClientListener.onError(...)`, and an audio-only session is
   possible (with no camera or screen share).
 
 
