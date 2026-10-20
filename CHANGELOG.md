@@ -6,6 +6,82 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [0.41.0] - 2026-10-20
+
+### Added
+
+- Added `startBitrate` to `VideoSendSettings` and `VideoSendSettingsUpdate`
+  (`VideoSendSettingsUpdate.Builder.withStartBitrate`), so the bitrate the
+  camera and screen video start sending at can be configured. It is in bits per
+  second and defaults to 1_000_000, the value previously hardcoded.
+
+- Added `adaptiveLayerMaxBitrate` to `VideoSendSettings` and
+  `VideoSendSettingsUpdate`
+  (`VideoSendSettingsUpdate.Builder.withAdaptiveLayerMaxBitrate`), to cap, in
+  bits per second, the bitrate adaptive bitrate ramps up to. It never goes
+  below 200000 and can be changed during a call; `FromDefaults()` removes it.
+
+- Added `connectionSettings` to `ClientSettingsUpdate`
+  (`ClientSettingsUpdate.Builder.withConnectionSettings`), used when joining,
+  with `ConnectionSettings.initialReceiveBitrate`: your expected download
+  bandwidth, in bits per second. The SFU starts its estimate of what it can
+  send you from this value (1000000 by default), which also sets the first
+  target bitrate other participants get.
+
+- Added experimental support for `VP9` as a `preferredCodec`. VP8 remains the
+  default: VP9 is only used when an application explicitly sets it, and the
+  SFU's router offers VP9. It is sent as one plain stream without SVC layers:
+  the Android SDK does not pass scalability modes to libwebrtc, which then
+  refuses an SVC encoding. Recording and RTMP streaming do not support VP9
+  yet. libwebrtc is now built with VP9 (`rtc_libvpx_build_vp9`), so VP9 can be
+  both sent and received.
+
+- Added `CallClient.callConfiguration()`, returning the configuration of the
+  call currently in progress, so it can be read from the `joined` callback.
+
+### Changed
+
+- **Breaking:** the SDK is now built with Kotlin 2.2.20, up from 1.9.25, and so
+  depends on `kotlin-stdlib` 2.2.20. Consumers still on Kotlin 1.9 will need to
+  upgrade: their compiler cannot read metadata from that stdlib, and fails with
+  "was compiled with an incompatible version of Kotlin". This follows the Android
+  Gradle Plugin upgrade to 8.13.0, whose own artifacts already require it.
+
+### Fixed
+
+- Fixed an intermittent native crash (`SIGSEGV` on the `AudioEncoderQueue`
+  thread) after calling `CallClient.release()` on a joined client without
+  calling `leave()` first. The call's peer connection and microphone stayed
+  alive after the release and were later used after the WebRTC threads had
+  been destroyed.
+
+- Fixed a rare deadlock that could freeze the app while a `CallClient` was
+  being released shortly after another one.
+
+- Fixed a native memory leak that grew with the length of a call, about
+  0.7 MB per minute with one published and one subscribed track.
+
+- Fixed settings updates failing to deserialize. Values that `UpdateSerializer`
+  writes in short form -- a `Device` as its id string, a `Width` as a number,
+  `FromDefaults` as `"fromDefaults"` -- can now be read back.
+
+- Fixed per-stream bitrates in the network stats (`videoSendBitsPerSecond`,
+  `videoRecvBitsPerSecond`) being 1,000 times too small.
+
+- Fixed `videoSendBitsPerSecond`, `sendBitsPerSecond` and the other send-side
+  network stats always reading 0: libwebrtc 8010's stats no longer include a
+  field the parser required, so all stats for the sending connection were
+  discarded.
+
+- Fixed the top simulcast layer not being sent at the start of a call.
+  `maxQuality` was passed to libmediasoupclient off by one, so `high` turned
+  the high layer off, `medium` turned the medium layer off and `low` had no
+  effect. With adaptive layers off, receivers got at most the medium layer
+  (360p for a 720p camera) until the camera track was next updated, for
+  example by switching or toggling the camera. With adaptive layers on, it
+  lasted only until the first adaptive-layer update, a second or two in.
+
+
 ## [0.40.0] - 2026-09-23
 
 ### Added
